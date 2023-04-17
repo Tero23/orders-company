@@ -23,6 +23,14 @@ const app = express();
 
 app.use(express.static(buildPath));
 
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 // 1) Global Middlewares
 // Set security HTTP headers
 app.use(helmet());
